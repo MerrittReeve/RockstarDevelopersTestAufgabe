@@ -1,0 +1,42 @@
+.detail {
+    position: relative;
+}
+
+.detail-open {
+    min-width: 40%;
+    padding: 0 2em;
+}
+
+.close {
+    background-color: #333333;
+    border: none;
+    border-radius: 50px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: none;
+    height: 25px;
+    position: absolute;
+    top: 1em;
+    right: 2em;
+    width: 25px;
+}
+
+.is-active {
+    display: block;
+}
+
+@media all and (max-width: 500px) {
+    .detail {
+        background-color: #FFFFFF;
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    .detail-open {
+        display: block;
+    }
+}
