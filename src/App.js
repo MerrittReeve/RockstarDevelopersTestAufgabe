@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+//essential imports
+import { useState, useEffect } from 'react';
+
+//API imports
+import { API } from './config.js';
+
+//Component imports
+import Table from './components/Table/Table';
+import TableRow from './components/TableRow/TableRow';
+
+//Style imports
+import styles from './App.module.scss';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+	const [houses, setHouses] = useState([]);
+	const [activeHouse, setActiveHouse] = useState({});
+
+	useEffect(() => {
+		fetch(API)
+			.then(response => response.json())
+			.then(response => setHouses(response))
+	}, [])
+
+	function setActiveHouseOnClick(house) {
+		setActiveHouse(house)
+	}
+
+	return (
+		<div className={ styles.app }>
+			<Table>
+				{
+					houses.map((house, i) => (
+						<TableRow key={i} onClick={() => setActiveHouseOnClick(house)}>{house.name}</TableRow>
+					))
+				}
+			</Table>
+			<div>
+				{ activeHouse.name }
+			</div>
+		</div>
+	);
 }
 
 export default App;
